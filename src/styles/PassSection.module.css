@@ -68,3 +68,20 @@
   50% { transform: translateX(100%) rotate(45deg); }
   100% { transform: translateX(100%) rotate(45deg); }
 }
+
+@media (max-width: 768px) {
+  .passSection {
+    padding: 40px 0;
+    width: 100%;
+    align-items: center;
+  }
+
+  .card {
+    width: 320px;
+    height: 180px;
+  }
+
+  .passImg {
+    width: 110%;
+  }
+}

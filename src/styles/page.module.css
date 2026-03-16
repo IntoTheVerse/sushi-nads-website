@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   position: relative;
 }
@@ -10,18 +10,19 @@
   flex: 1;
   display: flex;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .textureBg {
   position: absolute;
-  top: 120px; /* Start securely below the exact height of the headerArea */
+  top: 0;
   left: 0; right: 0; bottom: 0;
   background-image: url('/img/texture 1.png');
   background-repeat: repeat;
   background-size: 800px auto;
   background-position: top center;
-  opacity: 1;
+  opacity: 0.8; /* Increased for better visibility across components */
   pointer-events: none;
   z-index: 1;
 }
@@ -163,6 +164,29 @@
   display: block;
   z-index: 5;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .mainArea {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 100px; /* Clear the compact header */
+  }
+
+  .rightPanel {
+    margin-left: 0;
+    width: 100%;
+    padding: 0 20px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .textureBg {
+    top: 0;
+  }
 }
 
 .gameInfoSection {

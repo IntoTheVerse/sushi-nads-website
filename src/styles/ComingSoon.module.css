@@ -7,9 +7,9 @@
   background-color: #7F4CC3;
   border-top: 3px solid #C3B0F0;
   border-bottom: 3px solid #C3B0F0;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  box-shadow: 0px 8px 15px rgba(0,0,0,0.3);
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
   z-index: 10;
 }
 
@@ -42,4 +42,16 @@
   50% { width: 0.8em; }
   75% { width: 1.2em; }
   100% { width: 1.2em; }
+}
+
+@media (max-width: 768px) {
+  .comingSoonSection {
+    height: 60px;
+    margin: 10px 0;
+  }
+
+  .soonTitle {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
 }

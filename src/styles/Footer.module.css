@@ -1,0 +1,158 @@
+.bottomBar {
+  height: 120px;
+  background-image: url('/img/footer 1.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  z-index: 30;
+  position: relative;
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: -10px;
+}
+
+.newsletterControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.newsletter span {
+  font-weight: normal;
+  color: #eaddff;
+  font-size: 26px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 2px;
+  text-shadow: 
+     -2px -2px 0 #5b31b3,  
+      2px -2px 0 #5b31b3,
+     -2px  2px 0 #5b31b3,
+      2px  2px 0 #5b31b3,
+      0px  3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.inputWrapper {
+  position: relative;
+  width: 380px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.inputBg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.emailInput {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  color: #8c73c8;
+  font-family: inherit;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.emailInput::placeholder {
+  color: #8c73c8;
+}
+
+.subscribeBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  height: 54px;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s;
+}
+
+.subscribeBtn img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.subscribeBtn:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0px 8px 15px rgba(100, 50, 200, 0.5)) brightness(1.1);
+}
+
+.subscribeBtn:active {
+  transform: scale(0.95) translateY(3px);
+  filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.4)) brightness(0.9);
+}
+
+.socials {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.socialIcon {
+  height: 55px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s;
+}
+
+.socialIcon:hover {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0px 8px 15px rgba(255, 255, 255, 0.3)) brightness(1.2);
+}
+
+.socialIcon:active {
+  transform: scale(0.9) rotate(-5deg);
+}
+
+.attribution {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c8b1ff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.attrLogo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0px 0px 4px rgba(180, 100, 255, 0.4));
+  }
+  20%, 40% {
+    transform: scale(1.1);
+    filter: drop-shadow(0px 0px 12px rgba(180, 100, 255, 1));
+  }
+  30% {
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 8px rgba(180, 100, 255, 0.8));
+  }
+}

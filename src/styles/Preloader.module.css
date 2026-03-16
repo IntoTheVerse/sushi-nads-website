@@ -1,0 +1,58 @@
+.preloaderContainer {
+  position: fixed;
+  inset: 0;
+  background-color: #6a43b4; /* Dark purple */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.textureOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/texture 1.png');
+  background-repeat: repeat;
+  background-size: 800px auto;
+  opacity: 0.8; /* Increased opacity to make it clearly visible */
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spriteWrapper {
+  position: relative;
+  width: 300px; /* Scaling the 847px frame down */
+  height: 300px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sprite {
+  width: 300px; /* Target display size */
+  height: 300px;
+  background-image: url('/img/sprite.png');
+  background-repeat: no-repeat;
+  background-size: 3000px 3000px; /* 10 columns * 300px */
+  image-rendering: auto;
+  mix-blend-mode: screen; /* Removes the black background from the sprite */
+  outline: none;
+  border: none;
+}
+
+/* Optional: Add a subtle glow behind the logo */
+.glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(127, 76, 195, 0.4) 0%, transparent 70%);
+  z-index: -1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.5); opacity: 0.8; }
+}

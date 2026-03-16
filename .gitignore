@@ -61,3 +61,7 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+#local assets
+/public/img/
+/public/image-seq/

@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
 
+@font-face {
+  font-family: 'GROBOLD';
+  src: url('/font/GROBOLD.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --primary-bg: #2d1854;
   --panel-bg: #442485;
@@ -20,11 +27,13 @@
 body {
   background-color: var(--primary-bg);
   color: var(--text-main);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'GROBOLD', sans-serif;
   overflow: hidden;
   height: 100vh;
   width: 100vw;
   background-image: radial-gradient(circle at center, #3c1e7a 0%, #20113c 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button {
@@ -37,11 +46,3 @@ input {
   font-family: inherit;
 }
 
-/* Add some subtle animated background pattern */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="%23fff" fill-opacity="0.03" fill-rule="evenodd"><circle cx="20" cy="20" r="2"/></g></svg>');
-  z-index: -1;
-}

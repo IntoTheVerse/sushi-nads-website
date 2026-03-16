@@ -10,6 +10,103 @@
   flex: 1;
   display: flex;
   position: relative;
+  overflow: hidden;
+}
+
+.textureBg {
+  position: absolute;
+  top: 120px; /* Start securely below the exact height of the headerArea */
+  left: 0; right: 0; bottom: 0;
+  background-image: url('/img/texture 1.png');
+  background-repeat: repeat;
+  background-size: 800px auto;
+  background-position: top center;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+
+.headerArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 160px;
+  z-index: 5; /* Lower than leftPanelWrapper (10) to go behind the animation */
+  display: flex;
+  pointer-events: none;
+  box-shadow: 0px 8px 15px  #7a65a8;
+}
+
+.headerBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top right;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.logoWrapper {
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  height: 145px;
+  width: 280px; /* Explicit width is more reliable than auto */
+  z-index: 2000; /* Higher than headerArea */
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.logoWrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -200%;
+  width: 150%; /* Wider shine for more impact */
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.logoWrapper:hover::after {
+  left: 200%;
+  transition: left 0.8s ease-in-out;
+}
+
+.logoWrapper:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.logoWrapper:active {
+  transform: scale(0.95);
+}
+
+.headerLogo {
+  position: relative;
+  height: 100%;
+  width: auto;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .leftPanelWrapper {
@@ -18,7 +115,6 @@
   left: 0;
   height: 100%;
   width: 60vw;
-  filter: drop-shadow(4px 0px 8px rgba(128, 78, 255, 0.9));
   z-index: 10;
 }
 
@@ -26,9 +122,28 @@
   width: 100%;
   height: 100%;
   background: var(--panel-bg);
-  clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
+  mask-image: url('/img/mask.png');
+  mask-size: cover;
+  mask-repeat: no-repeat;
+  mask-position: left bottom;
+  -webkit-mask-image: url('/img/mask.png');
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: left bottom;
   position: relative;
   overflow: hidden;
+}
+
+.confineOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left bottom;
+  pointer-events: none;
+  z-index: 20;
 }
 
 .imageCanvas {
@@ -43,92 +158,160 @@
 }
 
 .rightPanel {
-  margin-left: 50vw; 
+  margin-left: 55vw; 
   flex: 1;
+  display: block;
+  z-index: 5;
+  position: relative;
+}
+
+.gameInfoSection {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  padding: 40px;
-  z-index: 5;
+  gap: 16px;
+  padding-right: 40px;
+  margin-top: -30px;
+  margin-bottom: 25px;
 }
 
-.gameInfo {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--text-main);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+.gameInfoTitle {
+  font-size: 42px;
+  font-weight: normal;
+  color: #ffffff;
+  text-shadow: 
+     -2px -2px 0 #7e4de8,  
+      2px -2px 0 #7e4de8,
+     -2px  2px 0 #7e4de8,
+      2px  2px 0 #7e4de8,
+      0px  5px 10px rgba(0, 0, 0, 0.6);
+  margin-bottom: -5px;
+  letter-spacing: 1.5px;
+}
+
+.gameInfoDesc {
+  font-size: 16px;
+  font-family: 'Outfit', sans-serif;
+  color: #eaddff;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 520px;
   margin-bottom: 5px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .buttonGroup {
   display: flex;
-  gap: 16px;
+  gap: 24px;
 }
 
-.btn {
-  background: linear-gradient(to bottom, #dedcff 0%, #b4a3f3 100%);
-  color: #603bb2;
-  font-size: 18px;
-  font-weight: 900;
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-transform: uppercase;
-  box-shadow: 0px 6px 0px #8266d0, 0px 10px 16px rgba(0,0,0,0.3), inset 0px 2px 4px rgba(255,255,255,0.7);
-  transition: transform 0.1s, box-shadow 0.1s;
-  border: 2px solid #fff;
-  text-shadow: 0px 1px 0px rgba(255,255,255,0.5);
+.playBtn {
+  height: 60px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s;
 }
 
-.btn:active {
-  transform: translateY(6px);
-  box-shadow: 0px 0px 0px #8266d0, 0px 4px 8px rgba(0,0,0,0.3), inset 0px 2px 4px rgba(255,255,255,0.7);
+.playBtn:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.4)) brightness(1.1);
 }
 
-.comingSoon {
-  margin-top: 50px;
+.playBtn:active {
+  transform: scale(0.95) translateY(4px);
+  filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.4)) brightness(0.9);
+}
+
+.comingSoonSection {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 95px;
+  background-color: #7F4CC3;
+  border-top: 3px solid #C3B0F0;
+  border-bottom: 3px solid #C3B0F0;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 8px 15px rgba(0,0,0,0.3);
+  z-index: 10;
 }
 
 .soonTitle {
-  font-size: 42px;
-  font-weight: 900;
+  font-size: 58px;
+  font-weight: normal;
   color: #1a0b36;
   text-shadow: 
-    -2px -2px 0 #8b4eed,  
-     2px -2px 0 #8b4eed,
-    -2px  2px 0 #8b4eed,
-     2px  2px 0 #8b4eed,
-     0px  4px 8px rgba(0,0,0,0.4);
-  letter-spacing: 2px;
-  margin-bottom: 10px;
+     -2px -2px 0 #995cde,  
+      2px -2px 0 #995cde,
+     -2px  2px 0 #995cde,
+      2px  2px 0 #995cde,
+      0px  6px 12px rgba(0,0,0,0.5);
+  letter-spacing: 4px;
+}
+
+.passSection {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 90px;
+  padding-right: 30px;
+  flex: 1;
+}
+
+.passImg {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  width: 105%;
+  height: auto;
+  object-fit: contain;
+  z-index: 5;
+  filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
+  animation: floatPass 4s ease-in-out infinite;
+}
+
+@keyframes floatPass {
+  0%, 100% {
+    transform: translate(-50%, -46%);
+  }
+  50% {
+    transform: translate(-50%, -50%);
+  }
 }
 
 .card {
   background: rgba(0, 0, 0, 0.4);
-  border: 2px solid #5d34b3;
-  border-radius: 12px;
-  width: 320px;
-  height: 180px;
+  /* border: 3px solid #7F4CC3; */
+  border-radius: 18px;
+  width: 450px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0px 0px 30px rgba(164, 83, 255, 0.3);
+  box-shadow: inset 0px 0px 30px rgba(164, 83, 255, 0.3), 0px 15px 30px rgba(0,0,0,0.5);
   position: relative;
-  overflow: hidden;
+  /* NO overflow: hidden! The image needs to organically overflow the card bounds */
 }
 
-.card::before {
+/* New inner wrapper dedicated solely to clipping the background shine */
+.shineContainer {
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shineContainer::before {
   content: "";
   position: absolute;
   top: -50%; left: -50%; right: -50%; bottom: -50%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
   transform: rotate(45deg);
   animation: shine 4s infinite;
 }
@@ -140,83 +323,160 @@
 }
 
 .bottomBar {
-  height: 90px;
-  background: var(--bottom-bar-bg);
-  border-top: 3px solid #6b3ec6;
-  box-shadow: 0px -4px 15px rgba(0,0,0,0.5);
+  height: 120px;
+  background-image: url('/img/footer 1.png');
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 50px;
-  z-index: 20;
+  z-index: 30;
+  position: relative;
 }
 
 .newsletter {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: -10px;
+}
+
+.newsletterControls {
+  display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 
 .newsletter span {
-  font-weight: 900;
-  color: #a782eb;
-  text-transform: uppercase;
-  font-size: 20px;
+  font-weight: normal;
+  color: #eaddff;
+  font-size: 26px;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 2px;
+  text-shadow: 
+     -2px -2px 0 #5b31b3,  
+      2px -2px 0 #5b31b3,
+     -2px  2px 0 #5b31b3,
+      2px  2px 0 #5b31b3,
+      0px  3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.inputWrapper {
+  position: relative;
+  width: 380px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.inputBg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;
+  pointer-events: none;
 }
 
 .emailInput {
-  background: #a98eed;
+  position: relative;
+  z-index: 1;
+  background: transparent;
   border: none;
-  padding: 12px 16px;
-  border-radius: 8px;
-  color: #3b1980;
   outline: none;
-  font-size: 16px;
-  font-weight: 600;
-  width: 280px;
-  box-shadow: inset 0px 3px 6px rgba(0,0,0,0.2);
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  color: #8c73c8;
+  font-family: inherit;
+  font-size: 18px;
+  letter-spacing: 1px;
 }
 
 .emailInput::placeholder {
-  color: #7250b7;
+  color: #8c73c8;
 }
 
 .subscribeBtn {
-  background: linear-gradient(to bottom, #ffa7f9 0%, #db5fe6 100%);
-  color: #fff;
-  font-size: 18px;
-  font-weight: 900;
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-transform: uppercase;
-  box-shadow: 0px 4px 0px #a322c3, 0px 6px 10px rgba(0,0,0,0.3);
-  transition: transform 0.1s, box-shadow 0.1s;
-  border: 2px solid #fff;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  height: 54px;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s;
+}
+
+.subscribeBtn img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.subscribeBtn:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0px 8px 15px rgba(100, 50, 200, 0.5)) brightness(1.1);
 }
 
 .subscribeBtn:active {
-  transform: translateY(4px);
-  box-shadow: 0px 0px 0px #a322c3, 0px 2px 5px rgba(0,0,0,0.3);
+  transform: scale(0.95) translateY(3px);
+  filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.4)) brightness(0.9);
 }
 
 .socials {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  align-items: center;
 }
 
-.icon {
-  width: 36px;
-  height: 36px;
-  background: #fff;
-  border-radius: 8px;
-  opacity: 0.9;
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+.socialIcon {
+  height: 55px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s;
 }
 
-.icon:hover {
-  opacity: 1;
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0px 6px 12px rgba(0,0,0,0.4);
+.socialIcon:hover {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0px 8px 15px rgba(255, 255, 255, 0.3)) brightness(1.2);
+}
+
+.socialIcon:active {
+  transform: scale(0.9) rotate(-5deg);
+}
+
+.attribution {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c8b1ff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.attrLogo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0px 0px 4px rgba(180, 100, 255, 0.4));
+  }
+  20%, 40% {
+    transform: scale(1.1);
+    filter: drop-shadow(0px 0px 12px rgba(180, 100, 255, 1));
+  }
+  30% {
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 8px rgba(180, 100, 255, 0.8));
+  }
 }

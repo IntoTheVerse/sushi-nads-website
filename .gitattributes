@@ -1,0 +1,2 @@
+public/image-seq/*.png filter=lfs diff=lfs merge=lfs -text
+public/img/*.png filter=lfs diff=lfs merge=lfs -text

@@ -4,34 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
 
 export default function Home() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    // We will preload all 300 images
-    // Note: for production, a sprite sheet or video might be more optimal,
-    // but for this barebones prototype, an image sequence is used exactly as requested.
-    const loadedImages: HTMLImageElement[] = [];
-    for (let i = 1; i <= 300; i++) {
-      const img = new Image();
-      const formattedNumber = i.toString().padStart(3, '0');
-      img.src = `/image-seq/ezgif-frame-${formattedNumber}.png`;
-      loadedImages.push(img);
-    }
-    setImages(loadedImages);
-  }, []);
-
-  useEffect(() => {
-    if (images.length === 0) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
+    let frame = 1;
     let rafId: number;
-    let frame = 0;
-    
-    // We aim for approx 30 FPS.
     const fps = 30;
     const interval = 1000 / fps;
     let lastTime = performance.now();
@@ -43,54 +20,62 @@ export default function Home() {
       if (deltaTime >= interval) {
         lastTime = time - (deltaTime % interval);
         
-        const img = images[frame];
-        if (img && img.complete && img.naturalWidth > 0) {
-          if (canvas.width !== img.naturalWidth) {
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-          }
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        if (imgRef.current) {
+            const formattedNumber = frame.toString().padStart(3, '0');
+            imgRef.current.src = `/image-seq/ezgif-frame-${formattedNumber}.png`;
         }
-        frame = (frame + 1) % images.length;
+        frame = frame % 300 + 1;
       }
     };
     
     rafId = requestAnimationFrame(render);
     return () => cancelAnimationFrame(rafId);
-  }, [images]);
+  }, []);
 
   return (
     <div className={styles.container}>
+      {/* Header spanning right side behind diagonal clip */}
+      <div className={styles.headerArea}>
+        <img src="/img/header.png" className={styles.headerBg} alt="header bg" />
+      </div>
+
+      <div className={styles.logoWrapper}>
+        <img src="/img/logo_high_res.png" className={styles.headerLogo} alt="Sushi Nads Logo" />
+      </div>
+
       <div className={styles.mainArea}>
+        <div className={styles.textureBg}></div>
         {/* The highlighted left panel area containing the image sequence loop */}
         <div className={styles.leftPanelWrapper}>
+          <img src="/img/confine.png" alt="frame confine overlay" className={styles.confineOverlay} />
           <div className={styles.leftPanel}>
-             <canvas ref={canvasRef} className={styles.imageCanvas} />
+             <img ref={imgRef} alt="sequence" className={styles.imageCanvas} />
           </div>
         </div>
 
-        {/* The right panel UI with placeholders */}
+        {/* The right panel UI with exact vertical mapping to bands */}
         <div className={styles.rightPanel}>
-          <div className={styles.gameInfo}>Game Info</div>
-          <div className={styles.buttonGroup}>
-            <button className={styles.btn}>Play on Android</button>
-            <button className={styles.btn}>Play on Web</button>
+          <div style={{ height: '230px' }}></div> {/* Spacer for Band 1 */}
+          
+          <div className={styles.gameInfoSection}>
+            <div className={styles.gameInfoTitle}>Outcook everyone on Monad</div>
+            <div className={styles.gameInfoDesc}>
+              Cook sushi and deliver under pressure. Bend time. Every order counts. Overcook and you&apos;re done. Your Chef and your scores live on monad. <br /><br /><b>Fast, frantic, competitive and fully onchain.</b>
+            </div>
+            <div className={styles.buttonGroup}>
+              <img src="/img/ply_andr_btn 1.png" className={styles.playBtn} alt="Play on Android" />
+              <img src="/img/ply_web_btn 1.png" className={styles.playBtn} alt="Play on Web" />
+            </div>
           </div>
           
-          <div className={styles.comingSoon}>
+          <div className={styles.comingSoonSection}>
             <div className={styles.soonTitle}>COMING SOON...</div>
+          </div>
+
+          <div className={styles.passSection}>
             <div className={styles.card}>
-              <h3 style={{
-                color: '#ffe54e', 
-                fontSize: '28px', 
-                fontStyle: 'italic', 
-                fontWeight: 900,
-                zIndex: 2,
-                textShadow: '2px 2px 0px #d8167e'
-              }}>
-                SUSHI NADS PASS
-              </h3>
+              <div className={styles.shineContainer}></div>
+              <img src="/img/pass.png" alt="Sushi Nads Pass" className={styles.passImg} />
             </div>
           </div>
         </div>
@@ -99,12 +84,28 @@ export default function Home() {
       <div className={styles.bottomBar}>
         <div className={styles.newsletter}>
           <span>Subscribe to newsletter with email</span>
-          <input type="email" placeholder="ENTER EMAIL..." className={styles.emailInput} />
-          <button className={styles.subscribeBtn}>Subscribe</button>
+          <div className={styles.newsletterControls}>
+            <div className={styles.inputWrapper}>
+              <img src="/img/box 3.png" className={styles.inputBg} alt="input box background" />
+              <input type="email" placeholder="ENTER EMAIL..." className={styles.emailInput} />
+            </div>
+            <button className={styles.subscribeBtn}>
+              <img src="/img/subs_btn 1.png" alt="Subscribe" />
+            </button>
+          </div>
         </div>
+
+        <div className={styles.attribution}>
+          Built on <img src="/img/monad.png" alt="Monad" className={styles.attrLogo} /> by <img src="/img/intotheverse.png" alt="IntoTheVerse Games" className={styles.attrLogo} />
+        </div>
+
         <div className={styles.socials}>
-          <div className={styles.icon} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px', fontWeight: 900, color: '#3b1980'}}>D</div>
-          <div className={styles.icon} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px', fontWeight: 900, color: '#3b1980'}}>X</div>
+          <a href="https://discord.gg/w94EVQRPRf" target="_blank" rel="noopener noreferrer">
+            <img src="/img/discord 1.png" className={styles.socialIcon} alt="Discord" />
+          </a>
+          <a href="https://x.com/sushinads" target="_blank" rel="noopener noreferrer">
+            <img src="/img/x.png" className={styles.socialIcon} alt="X (formerly Twitter)" />
+          </a>
         </div>
       </div>
     </div>

@@ -1,0 +1,70 @@
+.passSection {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 90px;
+  padding-right: 30px;
+  flex: 1;
+}
+
+.passImg {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  width: 105%;
+  height: auto;
+  object-fit: contain;
+  z-index: 5;
+  filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
+  animation: floatPass 4s ease-in-out infinite;
+}
+
+@keyframes floatPass {
+  0%, 100% {
+    transform: translate(-50%, -46%);
+  }
+  50% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.4);
+  /* border: 3px solid #7F4CC3; */
+  border-radius: 18px;
+  width: 450px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0px 0px 30px rgba(164, 83, 255, 0.3), 0px 15px 30px rgba(0,0,0,0.5);
+  position: relative;
+  /* NO overflow: hidden! The image needs to organically overflow the card bounds */
+}
+
+/* New inner wrapper dedicated solely to clipping the background shine */
+.shineContainer {
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shineContainer::before {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: rotate(45deg);
+  animation: shine 4s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  50% { transform: translateX(100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}

@@ -65,4 +65,4 @@ Thumbs.db
 #local assets
 /public/img/
 /public/image-seq/
-/public/website-gif/
+# /public/website-gif/

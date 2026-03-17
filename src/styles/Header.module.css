@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 120px;
+  height: 160px;
   z-index: 5; /* Lower than leftPanelWrapper (10) to go behind the animation */
   display: flex;
   pointer-events: none;
@@ -19,7 +19,8 @@
   object-fit: cover;
   object-position: top right;
   z-index: 1;
-  pointer-events: none; /* Never block interactions below it */
+  pointer-events: none;
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
 .logoWrapper {
@@ -27,11 +28,11 @@
   top: 5px;
   right: 30px;
   height: 145px;
-  width: 280px; /* Explicit width is more reliable than auto */
-  z-index: 2000; /* Higher than headerArea */
+  width: 280px;
+  z-index: 2000;
   pointer-events: auto;
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,13 +80,27 @@
   pointer-events: none;
 }
 
+
+
+
 @media (max-width: 768px) {
   .headerArea {
-    height: 80px;
+    height: 120px;
     z-index: 3000;
+    position: fixed;
+  }
+
+  .headerBg.scrolled {
+    opacity: 0.3 !important;
+    backdrop-filter: blur(4px);
+  }
+
+  .logoWrapper.scrolled {
+    opacity: 0.95 !important;
   }
 
   .logoWrapper {
+    position: fixed;
     height: 70px;
     width: 140px;
     right: 50%;
@@ -101,4 +116,7 @@
   .logoWrapper:active {
     transform: translateX(50%) scale(0.95);
   }
+
+
+
 }

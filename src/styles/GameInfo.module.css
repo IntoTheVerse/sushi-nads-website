@@ -45,6 +45,36 @@
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+.pulseText {
+  display: inline-block;
+  color: #ff479a; /* Using the accent color */
+  animation: heartbeatGlow 1.5s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 71, 154, 0.5);
+}
+
+@keyframes heartbeatGlow {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
+  }
+  14% {
+    transform: scale(1.1);
+    text-shadow: 0 0 15px rgba(255, 71, 154, 0.8);
+  }
+  28% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
+  }
+  42% {
+    transform: scale(1.1);
+    text-shadow: 0 0 15px rgba(255, 71, 154, 0.8);
+  }
+  70% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
+  }
+}
+
 .buttonGroup {
   display: flex;
   gap: 24px;

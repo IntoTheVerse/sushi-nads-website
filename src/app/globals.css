@@ -24,12 +24,16 @@
   padding: 0;
 }
 
+html, body {
+  height: auto;
+  min-height: 100%;
+}
+
 body {
   background-color: var(--primary-bg);
   color: var(--text-main);
   font-family: 'GROBOLD', sans-serif;
   overflow-x: hidden;
-  overflow-y: auto;
   min-height: 100vh;
   background-image: radial-gradient(circle at center, #3c1e7a 0%, #20113c 100%);
   -webkit-font-smoothing: antialiased;

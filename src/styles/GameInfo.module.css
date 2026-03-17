@@ -79,12 +79,13 @@
 
   .gameInfoSection {
     padding-right: 0;
-    margin-top: 0;
+    margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
   }
 
   .gameInfoTitle {
+    margin-top: 50px;
     font-size: 28px;
     text-align: center;
   }

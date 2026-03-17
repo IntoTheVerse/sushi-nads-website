@@ -24,12 +24,12 @@
   font-size: 42px;
   font-weight: normal;
   color: #ffffff;
-  text-shadow: 
-     -2px -2px 0 #7e4de8,  
-      2px -2px 0 #7e4de8,
-     -2px  2px 0 #7e4de8,
-      2px  2px 0 #7e4de8,
-      0px  5px 10px rgba(0, 0, 0, 0.6);
+  text-shadow:
+    -2px -2px 0 #7e4de8,
+    2px -2px 0 #7e4de8,
+    -2px 2px 0 #7e4de8,
+    2px 2px 0 #7e4de8,
+    0px 5px 10px rgba(0, 0, 0, 0.6);
   margin-bottom: -5px;
   letter-spacing: 1.5px;
 }
@@ -47,7 +47,8 @@
 
 .pulseText {
   display: inline-block;
-  color: #ff479a; /* Using the accent color */
+  color: #ff479a;
+  /* Using the accent color */
   animation: heartbeatGlow 1.5s ease-in-out infinite;
   text-shadow: 0 0 10px rgba(255, 71, 154, 0.5);
 }
@@ -57,18 +58,22 @@
     transform: scale(1);
     text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
   }
+
   14% {
     transform: scale(1.1);
     text-shadow: 0 0 15px rgba(255, 71, 154, 0.8);
   }
+
   28% {
     transform: scale(1);
     text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
   }
+
   42% {
     transform: scale(1.1);
     text-shadow: 0 0 15px rgba(255, 71, 154, 0.8);
   }
+
   70% {
     transform: scale(1);
     text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
@@ -109,8 +114,9 @@
 
   .gameInfoSection {
     padding-right: 0;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
     width: 100%;
   }
 
@@ -126,10 +132,11 @@
   }
 
   .buttonGroup {
-    gap: 12px;
+    gap: 8px;
+    padding-bottom: 20px !important;
   }
 
   .playBtn {
-    height: 45px;
+    height: 40px;
   }
 }

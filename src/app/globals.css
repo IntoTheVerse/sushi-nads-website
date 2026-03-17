@@ -28,9 +28,9 @@ body {
   background-color: var(--primary-bg);
   color: var(--text-main);
   font-family: 'GROBOLD', sans-serif;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
   background-image: radial-gradient(circle at center, #3c1e7a 0%, #20113c 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

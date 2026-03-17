@@ -12,7 +12,7 @@
 .textureOverlay {
   position: absolute;
   inset: 0;
-  background-image: url('/img/texture 1.png');
+  background-image: url('/img/img-comp/texture 1.png');
   background-repeat: repeat;
   background-size: 800px auto;
   opacity: 0.8; /* Increased opacity to make it clearly visible */
@@ -33,7 +33,7 @@
 .sprite {
   width: 300px; /* Target display size */
   height: 300px;
-  background-image: url('/img/sprite.png');
+  background-image: url('/img/img-comp/sprite.png');
   background-repeat: no-repeat;
   background-size: 3000px 3000px; /* 10 columns * 300px */
   image-rendering: auto;

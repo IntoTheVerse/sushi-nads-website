@@ -40,4 +40,4 @@ function renderAscii(filename) {
     }
     console.log(out);
 }
-renderAscii('public/img/confine.png');
+renderAscii('public/img/img-comp/confine.png');

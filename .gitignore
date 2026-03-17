@@ -63,6 +63,6 @@ Thumbs.db
 *.sw?
 
 #local assets
-/public/img/
+/public/img/img-uncomp/
 /public/image-seq/
 # /public/website-gif/

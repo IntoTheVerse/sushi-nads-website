@@ -35,8 +35,8 @@ export default function LeftPanel() {
 
   return (
     <div className={styles.leftPanelWrapper}>
-      <img src="/img/confine.png" alt="frame confine overlay" className={styles.confineOverlay} />
-      <img src="/img/mobile_frame 1.png" alt="mobile frame overlay" className={styles.mobileFrameOverlay} />
+      <img src="/img/img-comp/confine.png" alt="frame confine overlay" className={styles.confineOverlay} />
+      <img src="/img/img-comp/mobile_frame 1.png" alt="mobile frame overlay" className={styles.mobileFrameOverlay} />
       <div className={styles.leftPanel}>
          <img ref={imgRef} alt="sequence" className={styles.imageCanvas} />
       </div>

@@ -6,7 +6,7 @@ export default function PassSection() {
     <div className={styles.passSection}>
       <div className={styles.card}>
         <div className={styles.shineContainer}></div>
-        <img src="/img/pass.png" alt="Sushi Nads Pass" className={styles.passImg} />
+        <img src="/img/img-comp/pass.png" alt="Sushi Nads Pass" className={styles.passImg} />
       </div>
     </div>
   );

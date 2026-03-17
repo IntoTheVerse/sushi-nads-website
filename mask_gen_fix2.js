@@ -1,7 +1,7 @@
 const fs = require('fs');
 const PNG = require('pngjs').PNG;
 
-fs.createReadStream('public/img/confine.png')
+fs.createReadStream('public/img/img-comp/confine.png')
   .pipe(new PNG({ filterType: 4 }))
   .on('parsed', function() {
     for (let y = 0; y < this.height; y++) {
@@ -35,7 +35,7 @@ fs.createReadStream('public/img/confine.png')
         }
     }
 
-    this.pack().pipe(fs.createWriteStream('public/img/mask.png')).on('finish', () => {
+    this.pack().pipe(fs.createWriteStream('public/img/img-comp/mask.png')).on('finish', () => {
         console.log('Mask generated successfully!');
     });
   });

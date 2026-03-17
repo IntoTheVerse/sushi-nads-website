@@ -11,11 +11,11 @@
   width: 100%;
   height: 100%;
   background: var(--panel-bg);
-  mask-image: url('/img/mask.png');
+  mask-image: url('/img/img-comp/mask.png');
   mask-size: cover;
   mask-repeat: no-repeat;
   mask-position: left bottom;
-  -webkit-mask-image: url('/img/mask.png');
+  -webkit-mask-image: url('/img/img-comp/mask.png');
   -webkit-mask-size: cover;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: left bottom;

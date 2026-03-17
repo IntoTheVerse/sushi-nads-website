@@ -40,4 +40,4 @@ function getPngAlphaStats(filename) {
         console.log('Not RGBA, colorType:', colorType);
     }
 }
-getPngAlphaStats('public/img/confine.png');
+getPngAlphaStats('public/img/img-comp/confine.png');

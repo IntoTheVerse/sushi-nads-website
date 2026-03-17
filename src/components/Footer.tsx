@@ -53,7 +53,7 @@ export default function Footer() {
         </span>
         <form className={styles.newsletterControls} onSubmit={handleSubscribe}>
           <div className={styles.inputWrapper}>
-            <img src="/img/box 3.png" className={styles.inputBg} alt="input box background" />
+            <img src="/img/img-comp/box 3.png" className={styles.inputBg} alt="input box background" />
             <input 
               type="email" 
               placeholder="ENTER EMAIL..." 
@@ -70,21 +70,21 @@ export default function Footer() {
             disabled={status === 'loading'}
             style={{ opacity: status === 'loading' ? 0.5 : 1 }}
           >
-            <img src="/img/subs_btn 1.png" alt="Subscribe" />
+            <img src="/img/img-comp/subs_btn 1.png" alt="Subscribe" />
           </button>
         </form>
       </div>
 
       <div className={styles.attribution}>
-        Built on <img src="/img/monad.png" alt="Monad" className={styles.attrLogo} /> by <img src="/img/intotheverse.png" alt="IntoTheVerse Games" className={styles.attrLogo} />
+        Built on <img src="/img/img-comp/monad.png" alt="Monad" className={styles.attrLogo} /> by <img src="/img/img-comp/intotheverse.png" alt="IntoTheVerse Games" className={styles.attrLogo} />
       </div>
 
       <div className={styles.socials}>
         <a href="https://discord.gg/w94EVQRPRf" target="_blank" rel="noopener noreferrer">
-          <img src="/img/discord 1.png" className={styles.socialIcon} alt="Discord icon" />
+          <img src="/img/img-comp/discord 1.png" className={styles.socialIcon} alt="Discord icon" />
         </a>
         <a href="https://x.com/sushinads" target="_blank" rel="noopener noreferrer">
-          <img src="/img/x.png" className={styles.socialIcon} alt="X icon" />
+          <img src="/img/img-comp/x.png" className={styles.socialIcon} alt="X icon" />
         </a>
       </div>
     </div>

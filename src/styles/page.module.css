@@ -17,7 +17,7 @@
   position: absolute;
   top: 0;
   left: 0; right: 0; bottom: 0;
-  background-image: url('/img/texture 1.png');
+  background-image: url('/img/img-comp/texture 1.png');
   background-repeat: repeat;
   background-size: 800px auto;
   background-position: top center;
@@ -122,11 +122,11 @@
   width: 100%;
   height: 100%;
   background: var(--panel-bg);
-  mask-image: url('/img/mask.png');
+  mask-image: url('/img/img-comp/mask.png');
   mask-size: cover;
   mask-repeat: no-repeat;
   mask-position: left bottom;
-  -webkit-mask-image: url('/img/mask.png');
+  -webkit-mask-image: url('/img/img-comp/mask.png');
   -webkit-mask-size: cover;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: left bottom;
@@ -350,7 +350,7 @@
 
 .bottomBar {
   height: 120px;
-  background-image: url('/img/footer 1.png');
+  background-image: url('/img/img-comp/footer 1.png');
   background-size: cover;
   background-position: center;
   display: flex;

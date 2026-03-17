@@ -1,7 +1,7 @@
 const fs = require('fs');
 const PNG = require('pngjs').PNG;
 
-fs.createReadStream('public/img/confine.png')
+fs.createReadStream('public/img/img-comp/confine.png')
   .pipe(new PNG())
   .on('parsed', function() {
     let opaqueCount = 0;

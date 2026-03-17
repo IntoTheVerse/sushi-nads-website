@@ -1,2 +1,6 @@
 public/image-seq/*.png filter=lfs diff=lfs merge=lfs -text
 public/img/*.png filter=lfs diff=lfs merge=lfs -text
+public/website-gif/*.jpg filter=lfs diff=lfs merge=lfs -text
+public/img/img-uncomp/*.png filter=lfs diff=lfs merge=lfs -text
+public/img/img-comp/*.png filter=lfs diff=lfs merge=lfs -text
+

@@ -13,8 +13,8 @@ export default function GameInfo() {
         </div>
         {/* <div className={styles.infoLabel}>Game Info</div> */}
         <div className={styles.buttonGroup}>
-          <img src="/img/ply_andr_btn 1.png" className={styles.playBtn} alt="Play on Android" />
-          <img src="/img/ply_web_btn 1.png" className={styles.playBtn} alt="Play on Web" />
+          <img src="/img/img-comp/ply_andr_btn 1.png" className={styles.playBtn} alt="Play on Android" />
+          <img src="/img/img-comp/ply_web_btn 1.png" className={styles.playBtn} alt="Play on Web" />
         </div>
       </div>
     </>

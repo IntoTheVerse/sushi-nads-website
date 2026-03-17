@@ -40,6 +40,35 @@
       0px  3px 5px rgba(0, 0, 0, 0.4);
 }
 
+@keyframes heartbeatGlow {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
+  }
+  14% {
+    transform: scale(1.05);
+    text-shadow: 0 0 15px rgba(255, 71, 154, 0.8);
+  }
+  28% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
+  }
+  42% {
+    transform: scale(1.05);
+    text-shadow: 0 0 15px rgba(255, 71, 154, 0.8);
+  }
+  70% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 71, 154, 0.5);
+  }
+}
+
+.pulseText {
+  display: inline-block;
+  color: #ff479a;
+  animation: heartbeatGlow 1.5s ease-in-out infinite;
+}
+
 .inputWrapper {
   position: relative;
   width: 380px;
@@ -204,7 +233,9 @@
   .attribution {
     position: static;
     transform: none;
-    font-size: 12px;
+    font-size: 11px;
+    /* margin-bottom: 10px; */
+    padding: 0px 0px 20px 0px; /* Increased bottom padding */
     order: 3;
     opacity: 0.8;
   }

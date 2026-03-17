@@ -1,20 +1,78 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import styles from '../styles/Footer.module.css';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) return;
+    
+    // Safety check for the environment variable
+    const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+    if (!scriptUrl || scriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+      console.warn('Newsletter script URL is not configured in .env.local');
+      setStatus('error');
+      return;
+    }
+
+    setStatus('loading');
+
+    try {
+      await fetch(scriptUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      // Since we use no-cors, we won't see the JSON result, but we can assume success if no error is thrown
+      setStatus('success');
+      setEmail('');
+      
+      // Reset back to idle after 3 seconds
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (err) {
+      console.error('Subscription error:', err);
+      setStatus('error');
+    }
+  };
+
   return (
     <div className={styles.bottomBar}>
       <div className={styles.newsletter}>
-        <span>Subscribe to newsletter with email</span>
-        <div className={styles.newsletterControls}>
+        <span className={styles.pulseText}>
+          {status === 'success' ? 'THANKS FOR SUBSCRIBING!' : 
+           status === 'error' ? 'TRY AGAIN LATER' : 
+           'Subscribe to newsletter with email'}
+        </span>
+        <form className={styles.newsletterControls} onSubmit={handleSubscribe}>
           <div className={styles.inputWrapper}>
             <img src="/img/box 3.png" className={styles.inputBg} alt="input box background" />
-            <input type="email" placeholder="ENTER EMAIL..." className={styles.emailInput} />
+            <input 
+              type="email" 
+              placeholder="ENTER EMAIL..." 
+              className={styles.emailInput} 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={status === 'loading'}
+              required
+            />
           </div>
-          <button className={styles.subscribeBtn}>
+          <button 
+            type="submit" 
+            className={styles.subscribeBtn} 
+            disabled={status === 'loading'}
+            style={{ opacity: status === 'loading' ? 0.5 : 1 }}
+          >
             <img src="/img/subs_btn 1.png" alt="Subscribe" />
           </button>
-        </div>
+        </form>
       </div>
 
       <div className={styles.attribution}>
@@ -23,10 +81,10 @@ export default function Footer() {
 
       <div className={styles.socials}>
         <a href="https://discord.gg/w94EVQRPRf" target="_blank" rel="noopener noreferrer">
-          <img src="/img/discord 1.png" className={styles.socialIcon} alt="Discord" />
+          <img src="/img/discord 1.png" className={styles.socialIcon} alt="Discord icon" />
         </a>
         <a href="https://x.com/sushinads" target="_blank" rel="noopener noreferrer">
-          <img src="/img/x.png" className={styles.socialIcon} alt="X (formerly Twitter)" />
+          <img src="/img/x.png" className={styles.socialIcon} alt="X icon" />
         </a>
       </div>
     </div>

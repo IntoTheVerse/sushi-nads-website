@@ -8,7 +8,7 @@ export default function LeftPanel() {
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    let frame = 1;
+    let frame = 0;
     let rafId: number;
     const fps = 30;
     const interval = 1000 / fps;
@@ -22,10 +22,10 @@ export default function LeftPanel() {
         lastTime = time - (deltaTime % interval);
         
         if (imgRef.current) {
-            const formattedNumber = frame.toString().padStart(3, '0');
-            imgRef.current.src = `/image-seq/ezgif-frame-${formattedNumber}.png`;
+            const formattedNumber = frame.toString().padStart(5, '0');
+            imgRef.current.src = `/website-gif/website-gif_${formattedNumber}.jpg`;
         }
-        frame = frame % 300 + 1;
+        frame = (frame + 1) % 338;
       }
     };
     

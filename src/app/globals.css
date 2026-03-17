@@ -40,6 +40,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 769px) {
+  html, body {
+    overflow: hidden;
+    height: 100vh;
+  }
+}
+
 button {
   cursor: pointer;
   border: none;

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import styles from '../styles/LeftPanel.module.css';
+import ScrollIndicator from './ScrollIndicator';
 
 export default function LeftPanel() {
   const imgRef = useRef<HTMLImageElement>(null);
@@ -39,6 +40,7 @@ export default function LeftPanel() {
       <div className={styles.leftPanel}>
          <img ref={imgRef} alt="sequence" className={styles.imageCanvas} />
       </div>
+      <ScrollIndicator />
     </div>
   );
 }

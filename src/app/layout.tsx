@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sushi Nads",
   description: "Outcook everyone on Monad",
+  icons: {
+    icon: "/img/img-comp/sushi.ico",
+  },
 };
 
 export default function RootLayout({

@@ -62,7 +62,8 @@ Thumbs.db
 *.sln
 *.sw?
 
-#local assets
+# local assets
 /public/img/img-uncomp/
 /public/image-seq/
 # /public/website-gif/
+/public/unity-build/

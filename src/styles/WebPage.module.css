@@ -1,0 +1,233 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-color: var(--primary-bg); /* purple background */
+  overflow: hidden; /* no auto scroll */
+  height: 100vh;
+}
+
+.textureBg {
+  position: absolute;
+  top: 0;
+  left: 0; right: 0; bottom: 0;
+  background-image: url('/img/img-comp/texture 1.png');
+  background-repeat: repeat;
+  background-size: 800px auto;
+  background-position: top center;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contentArea {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Top padding must be larger than Header height (160px) */
+  padding-top: 180px; 
+  padding-bottom: 30px; 
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 100%;
+}
+
+/* Hide on mobile, show on Desktop */
+.gameWrapper {
+  display: flex;
+  flex-direction: row; /* display side by side */
+  align-items: stretch;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%; /* Let it flexibly fill the remaining content area */
+  max-height: 560px; /* Limit max size gracefully */
+}
+
+.iframeWrapper {
+  position: relative;
+  flex: 1 1 70%;
+  max-width: 1000px;
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 8px; /* Extra padding so buttons aren't hidden by borders */
+  background-color: #000;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.unityFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Fullscreen overlaps */
+.iframeWrapper:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  padding: 0; /* Remove padding when fullscreen */
+  border-radius: 0;
+  z-index: 9999;
+  max-width: none;
+}
+.iframeWrapper:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  padding: 0; /* Remove padding when fullscreen */
+  border-radius: 0;
+  z-index: 9999;
+  max-width: none;
+}
+
+.fullscreenBtn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: rgba(68, 36, 133, 0.8);
+  border: 2px solid #ff479a;
+  color: #fff;
+  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.fullscreenBtn:hover {
+  background-color: rgba(68, 36, 133, 1);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 71, 154, 0.5);
+}
+
+.fullscreenBtn svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.kitchenMenu {
+  flex: 1 1 30%;
+  max-width: 450px;
+  height: 100%;
+  background: rgba(68, 36, 133, 0.85);
+  border: 3px solid #c3b0f0;
+  border-radius: 16px;
+  padding: 20px 25px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.menuTitle {
+  font-size: 28px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px #7e4de8;
+}
+
+.instructionList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+  color: #eaddff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.instructionList li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.instructionList li::before {
+  content: '🍣';
+  font-size: 20px;
+}
+
+.keyLabel {
+  display: inline-block;
+  background-color: #2d1854;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #7e4de8;
+  font-weight: 600;
+  box-shadow: 0 2px 0 #7e4de8;
+}
+
+.punText {
+  text-align: center;
+  font-size: 18px;
+  color: #ff479a; /* accent color */
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  margin-top: auto;
+}
+
+/* Initially hide mobile message */
+.mobileMessage {
+  display: none;
+  background: rgba(68, 36, 133, 0.9);
+  border: 2px solid #ff479a;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 90%;
+  margin: 100px auto auto auto;
+}
+
+.mobileTitle {
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 0 #7e4de8;
+}
+
+.mobileDesc {
+  font-size: 16px;
+  font-family: 'Outfit', sans-serif;
+  color: #eaddff;
+  line-height: 1.5;
+}
+
+/* Mobile Media Query */
+@media (max-width: 768px) {
+  .gameWrapper {
+    display: none;
+  }
+  
+  .mobileMessage {
+    display: block;
+  }
+
+  .contentArea {
+    padding-top: 150px;
+  }
+}

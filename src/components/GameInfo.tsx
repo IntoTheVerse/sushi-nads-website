@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styles from '../styles/GameInfo.module.css';
 
 export default function GameInfo() {
@@ -14,7 +15,9 @@ export default function GameInfo() {
         {/* <div className={styles.infoLabel}>Game Info</div> */}
         <div className={styles.buttonGroup}>
           <img src="/img/img-comp/ply_andr_btn 1.png" className={styles.playBtn} alt="Play on Android" />
-          <img src="/img/img-comp/ply_web_btn 1.png" className={styles.playBtn} alt="Play on Web" />
+          <Link href="/web">
+            <img src="/img/img-comp/ply_web_btn 1.png" className={styles.playBtn} alt="Play on Web" />
+          </Link>
         </div>
       </div>
     </>

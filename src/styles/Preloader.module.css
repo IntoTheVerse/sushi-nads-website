@@ -33,7 +33,7 @@
 .sprite {
   width: 300px; /* Target display size */
   height: 300px;
-  background-image: url('/img/img-comp/sprite.png');
+  background-image: url('/img/img-comp/sprite1.png');
   background-repeat: no-repeat;
   background-size: 3000px 3000px; /* 10 columns * 300px */
   image-rendering: auto;

@@ -73,7 +73,7 @@ export default function WebGame() {
               )}
             </button>
             <iframe 
-              src="http://localhost:8080/" /* Point to locally hosted npx serve port */
+              src="/unity-build/index.html" /* Hosted WebGL build root */
               className={styles.unityFrame}
               title="Sushi Nads WebGL Game"
               allowFullScreen

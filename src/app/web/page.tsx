@@ -8,6 +8,7 @@ import styles from '../../styles/WebPage.module.css';
 export default function WebGame() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [activeTab, setActiveTab] = useState<'controls' | 'instructions'>('controls');
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -83,13 +84,46 @@ export default function WebGame() {
           
           <div className={styles.kitchenMenu}>
             <div className={styles.menuTitle}>Kitchen Orders</div>
-            
-            <ul className={styles.instructionList}>
-              <li>Use <span className={styles.keyLabel}>W</span> <span className={styles.keyLabel}>A</span> <span className={styles.keyLabel}>S</span> <span className={styles.keyLabel}>D</span> keys to move about the kitchen tile blocks</li>
-              <li>Use <span className={styles.keyLabel}>E</span> to pick/drop kitchen item and deliver dish</li>
-              <li>Use <span className={styles.keyLabel}>F</span> to cut kitchen items</li>
-              <li>Use on-screen dynamic buttons to replicate all game actions if not using keyboard keys</li>
-            </ul>
+
+            <div className={styles.tabGroup} role="tablist" aria-label="Kitchen guide sections">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === 'controls'}
+                className={`${styles.tabBtn} ${activeTab === 'controls' ? styles.tabBtnActive : ''}`}
+                onClick={() => setActiveTab('controls')}
+              >
+                Controls
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === 'instructions'}
+                className={`${styles.tabBtn} ${activeTab === 'instructions' ? styles.tabBtnActive : ''}`}
+                onClick={() => setActiveTab('instructions')}
+              >
+                Instructions
+              </button>
+            </div>
+
+            {activeTab === 'controls' ? (
+              <ul className={styles.instructionList}>
+                <li>Move with <span className={styles.keyLabel}>W</span> <span className={styles.keyLabel}>A</span> <span className={styles.keyLabel}>S</span> <span className={styles.keyLabel}>D</span>.</li>
+                <li>Grab or drop items with <span className={styles.keyLabel}>E</span>.</li>
+                <li>Chop ingredients with <span className={styles.keyLabel}>F</span>.</li>
+                <li>Use on-screen buttons if you are not on keyboard.</li>
+              </ul>
+            ) : (
+              <ul className={styles.instructionList}>
+                <li>Tap Controller (bottom left corner) for a quick tutorial with no onchain actions.</li>
+                <li>Tap Play to cook and deliver sushi onchain.</li>
+                <li>Tap Avatar (top-left) to open your player profile.</li>
+                <li>Tap Chef Hat button (below) for the live Monad leaderboard to see where your skills rank.</li>
+                <li>Low energy? Refill it and stay in the kitchen using the (+) icon on the energy bar.</li>
+                <li>Refills are currently free in this build (no USDC charged, even if the prompt says so).</li>
+                <li>The game server covers your Monad transaction fees.</li>
+              </ul>
+            )}
             
             <div className={styles.punText}>Time to serve up some un-roll-evably good sushi! Don't let the pressure boil over! 🍣🔥</div>
           </div>

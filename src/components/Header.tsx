@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import styles from '../styles/Header.module.css';
 
 export default function Header() {
@@ -28,9 +29,9 @@ export default function Header() {
           alt="header bg" 
         />
       </div>
-      <div className={`${styles.logoWrapper} ${isScrolled ? styles.scrolled : ''}`}>
+      <Link href="/home" className={`${styles.logoWrapper} ${isScrolled ? styles.scrolled : ''}`} aria-label="Go to home page">
         <img src="/img/img-comp/logo_high_res.png" className={styles.headerLogo} alt="Sushi Nads Logo" />
-      </div>
+      </Link>
     </>
   );
 }

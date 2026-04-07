@@ -11,6 +11,7 @@
   display: flex;
   position: relative;
   overflow: hidden; /* Lock scroll on desktop */
+  min-height: 0;
 }
 
 .textureBg {
@@ -158,11 +159,24 @@
 }
 
 .rightPanel {
-  margin-left: 55vw; 
+  margin-left: max(60vw, 540px);
   flex: 1;
   display: block;
   z-index: 5;
   position: relative;
+  min-width: 0;
+}
+
+@media (max-width: 1440px) and (min-width: 769px) {
+  .rightPanel {
+    margin-left: max(58vw, 540px);
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 769px) {
+  .rightPanel {
+    margin-left: max(56vw, 500px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -188,6 +202,31 @@
 
   .textureBg {
     top: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Keep footer visible on shorter desktop viewports (e.g. 13-inch screens). */
+  .mainArea {
+    height: calc(100vh - 120px);
+    min-height: 0;
+  }
+}
+
+@media (max-width: 1440px) and (min-width: 769px) {
+  .mainArea {
+    height: calc(100vh - 108px);
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .mainArea {
+    height: calc(100vh - 102px);
   }
 }
 

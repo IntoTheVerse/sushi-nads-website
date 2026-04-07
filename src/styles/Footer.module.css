@@ -186,6 +186,116 @@
   }
 }
 
+@media (max-width: 1440px) and (min-width: 769px) {
+  .bottomBar {
+    height: 108px;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .newsletter {
+    min-width: 0;
+  }
+
+  .newsletter span {
+    font-size: 20px;
+  }
+
+  .inputWrapper {
+    width: 290px;
+    height: 48px;
+  }
+
+  .subscribeBtn {
+    height: 46px;
+  }
+
+  .socials {
+    gap: 16px;
+  }
+
+  .socialIcon {
+    height: 36px;
+  }
+
+  .attribution {
+    position: static;
+    transform: none;
+    justify-self: center;
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .attrLogo {
+    height: 24px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .bottomBar {
+    height: auto;
+    min-height: 102px;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "newsletter socials"
+      "attribution attribution";
+    row-gap: 8px;
+    column-gap: 12px;
+  }
+
+  .newsletter {
+    grid-area: newsletter;
+  }
+
+  .newsletter span {
+    font-size: 16px;
+  }
+
+  .newsletterControls {
+    gap: 6px;
+  }
+
+  .inputWrapper {
+    width: 250px;
+    height: 42px;
+  }
+
+  .emailInput {
+    font-size: 14px;
+  }
+
+  .subscribeBtn {
+    height: 40px;
+  }
+
+  .socials {
+    grid-area: socials;
+    justify-self: end;
+    gap: 12px;
+  }
+
+  .socialIcon {
+    height: 30px;
+  }
+
+  .attribution {
+    grid-area: attribution;
+    justify-self: center;
+    font-size: 12px;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .attrLogo {
+    height: 18px;
+  }
+}
+
 @media (max-width: 768px) {
   .bottomBar {
     height: auto;

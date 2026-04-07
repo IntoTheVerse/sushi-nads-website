@@ -102,6 +102,85 @@
   filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.4)) brightness(0.9);
 }
 
+@media (max-width: 1366px) and (min-width: 769px) {
+  .desktopSpacer {
+    height: 190px;
+  }
+
+  .gameInfoSection {
+    padding-right: 16px;
+    margin-top: -14px;
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+
+  .gameInfoTitle {
+    font-size: 34px;
+  }
+
+  .gameInfoDesc {
+    font-size: 14px;
+    max-width: 420px;
+  }
+
+  .buttonGroup {
+    gap: 12px;
+  }
+
+  .playBtn {
+    height: 52px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .desktopSpacer {
+    height: 160px;
+  }
+
+  .gameInfoTitle {
+    font-size: 30px;
+  }
+
+  .gameInfoDesc {
+    max-width: 360px;
+  }
+
+  .playBtn {
+    height: 46px;
+  }
+}
+
+@media (max-height: 860px) and (min-width: 769px) {
+  .desktopSpacer {
+    height: 180px;
+  }
+
+  .gameInfoSection {
+    margin-top: 0;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .gameInfoTitle {
+    font-size: 32px;
+    line-height: 1.05;
+  }
+
+  .gameInfoDesc {
+    font-size: 13px;
+    line-height: 1.35;
+    max-width: 380px;
+  }
+
+  .buttonGroup {
+    gap: 8px;
+  }
+
+  .playBtn {
+    height: 42px;
+  }
+}
+
 @media (max-width: 768px) {
   .desktopSpacer {
     display: none;

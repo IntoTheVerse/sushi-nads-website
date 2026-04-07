@@ -61,3 +61,14 @@
     letter-spacing: 2px;
   }
 }
+
+@media (max-height: 860px) and (min-width: 769px) {
+  .comingSoonSection {
+    height: 74px;
+  }
+
+  .soonTitle {
+    font-size: 46px;
+    letter-spacing: 2px;
+  }
+}

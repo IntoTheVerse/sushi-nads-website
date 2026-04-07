@@ -44,6 +44,46 @@
   /* NO overflow: hidden! The image needs to organically overflow the card bounds */
 }
 
+@media (max-width: 1366px) and (min-width: 769px) {
+  .passSection {
+    padding-top: 58px;
+    padding-right: 14px;
+  }
+
+  .card {
+    width: 390px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .passSection {
+    padding-top: 48px;
+    padding-right: 8px;
+  }
+
+  .card {
+    width: 340px;
+    height: 195px;
+  }
+}
+
+@media (max-height: 860px) and (min-width: 769px) {
+  .passSection {
+    padding-top: 26px;
+    padding-right: 8px;
+  }
+
+  .card {
+    width: 300px;
+    height: 168px;
+  }
+
+  .passImg {
+    width: 100%;
+  }
+}
+
 /* New inner wrapper dedicated solely to clipping the background shine */
 .shineContainer {
   position: absolute;

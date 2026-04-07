@@ -4,6 +4,7 @@
   left: 0;
   height: 100%;
   width: 60vw;
+  min-width: 540px;
   z-index: 10;
 }
 
@@ -12,11 +13,11 @@
   height: 100%;
   background: var(--panel-bg);
   mask-image: url('/img/img-comp/mask.png');
-  mask-size: cover;
+  mask-size: 100% 100%;
   mask-repeat: no-repeat;
   mask-position: left bottom;
   -webkit-mask-image: url('/img/img-comp/mask.png');
-  -webkit-mask-size: cover;
+  -webkit-mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: left bottom;
   position: relative;
@@ -29,8 +30,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: left bottom;
+  object-fit: fill;
+  object-position: center;
   pointer-events: none;
   z-index: 20;
 }
@@ -43,6 +44,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   pointer-events: none;
 }
 
@@ -58,14 +60,45 @@
   pointer-events: none;
 }
 
+@media (max-width: 1440px) and (min-width: 769px) {
+  .leftPanelWrapper {
+    width: 58vw;
+  }
+
+  .leftPanel {
+    mask-position: left center;
+    -webkit-mask-position: left center;
+  }
+
+  .confineOverlay,
+  .imageCanvas {
+    object-position: 38% center;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 769px) {
+  .leftPanelWrapper {
+    width: 56vw;
+    min-width: 500px;
+  }
+
+  .confineOverlay,
+  .imageCanvas {
+    object-position: 42% center;
+  }
+}
+
 @media (max-width: 768px) {
   .leftPanelWrapper {
     position: relative;
     margin-left: 5%;
     margin-right: 5%;
-    width: auto;
-    height: 180px; /* Takes most of the first viewport */
-    min-height: 180px;
+    width: 90%;
+    min-width: 0;
+    max-width: 560px;
+    aspect-ratio: 920 / 480;
+    height: auto;
+    min-height: 0;
     margin-bottom: 20px;
     margin-top: 50px;
     display: flex;
@@ -79,22 +112,33 @@
 
   .mobileFrameOverlay {
     display: block;
-    width: auto;
-    height: 100%; /* Scale by height on mobile */
     width: 100%;
-    max-width:100vw;
+    height: auto;
+    max-width: 100%;
   }
 
   .leftPanel {
     mask-image: none;
     -webkit-mask-image: none;
-    border-radius: 35px; /* Matches curvature better */
-    width: 95%; 
+    border-radius: 35px;
+    width: 95%;
     height: 95%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* Match the visible phone display area under the bezel */
+    top: 1%;
+    left: 2%;
+    right: 2%;
+    bottom: 1%;
+    transform: none;
     background: #000;
+    overflow: hidden;
+    z-index: 5;
+  }
+
+  .imageCanvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
   }
 }

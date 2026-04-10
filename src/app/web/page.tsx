@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 import styles from '../../styles/WebPage.module.css';
 
 export default function WebGame() {
-  type FullscreenCapableElement = HTMLDivElement & {
+  type FullscreenCapableIframe = HTMLIFrameElement & {
     webkitRequestFullscreen?: () => Promise<void> | void;
     msRequestFullscreen?: () => Promise<void> | void;
   };
@@ -16,7 +16,7 @@ export default function WebGame() {
     msExitFullscreen?: () => Promise<void> | void;
   };
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState<'controls' | 'instructions'>('controls');
   const [apiHealthy, setApiHealthy] = useState(true);
@@ -73,18 +73,32 @@ export default function WebGame() {
     };
   }, []);
 
-  const handleFullscreenToggle = () => {
+  const requestEmbeddedFullscreen = () => {
+    const iframeWindow = iframeRef.current?.contentWindow;
+    if (!iframeWindow) return;
+
+    iframeWindow.postMessage(
+      { type: 'SUSHI_NADS_FULLSCREEN' },
+      window.location.origin
+    );
+  };
+
+  const handleFullscreenToggle = async () => {
     if (!document.fullscreenElement) {
-      if (wrapperRef.current) {
-        const fullscreenElement = wrapperRef.current as FullscreenCapableElement;
-        if (wrapperRef.current.requestFullscreen) {
-          wrapperRef.current.requestFullscreen();
-        } else if (fullscreenElement.webkitRequestFullscreen) {
-          fullscreenElement.webkitRequestFullscreen();
-        } else if (fullscreenElement.msRequestFullscreen) {
-          fullscreenElement.msRequestFullscreen();
-        }
+      const iframeEl = iframeRef.current as FullscreenCapableIframe | null;
+      if (!iframeEl) return;
+
+      if (iframeEl.requestFullscreen) {
+        await iframeEl.requestFullscreen();
+      } else if (iframeEl.webkitRequestFullscreen) {
+        iframeEl.webkitRequestFullscreen();
+      } else if (iframeEl.msRequestFullscreen) {
+        iframeEl.msRequestFullscreen();
       }
+
+      // Unity WebGL loader may initialize a moment later; fire twice for reliability.
+      requestEmbeddedFullscreen();
+      window.setTimeout(requestEmbeddedFullscreen, 250);
     } else {
       const fullscreenDocument = document as FullscreenCapableDocument;
       if (document.exitFullscreen) {
@@ -106,7 +120,7 @@ export default function WebGame() {
         {/* Desktop WebGL Player and Instructions */}
         <div className={styles.gameWrapper}>
           
-          <div ref={wrapperRef} className={styles.iframeWrapper}>
+          <div className={styles.iframeWrapper}>
             {apiHealthy && (
               <button
                 className={styles.fullscreenBtn}
@@ -127,6 +141,7 @@ export default function WebGame() {
 
             {apiHealthy ? (
               <iframe
+                ref={iframeRef}
                 src="/unity-build/index.html" /* Hosted WebGL build root */
                 className={styles.unityFrame}
                 title="Sushi Nads WebGL Game"

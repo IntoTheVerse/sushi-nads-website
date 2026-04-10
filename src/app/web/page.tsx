@@ -6,9 +6,56 @@ import Footer from '../../components/Footer';
 import styles from '../../styles/WebPage.module.css';
 
 export default function WebGame() {
+  type FullscreenCapableElement = HTMLDivElement & {
+    webkitRequestFullscreen?: () => Promise<void> | void;
+    msRequestFullscreen?: () => Promise<void> | void;
+  };
+
+  type FullscreenCapableDocument = Document & {
+    webkitExitFullscreen?: () => Promise<void> | void;
+    msExitFullscreen?: () => Promise<void> | void;
+  };
+
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState<'controls' | 'instructions'>('controls');
+  const [apiHealthy, setApiHealthy] = useState(true);
+  const [isHealthChecking, setIsHealthChecking] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const checkApiHealth = async (showLoading = false) => {
+      if (showLoading) setIsHealthChecking(true);
+
+      try {
+        const response = await fetch('/api/backend-health', {
+          method: 'GET',
+          cache: 'no-store',
+        });
+        const data = await response.json();
+        if (!cancelled) {
+          setApiHealthy(Boolean(data?.healthy));
+        }
+      } catch {
+        if (!cancelled) {
+          setApiHealthy(false);
+        }
+      } finally {
+        if (!cancelled) {
+          setIsHealthChecking(false);
+        }
+      }
+    };
+
+    checkApiHealth(true);
+    const intervalId = window.setInterval(() => checkApiHealth(false), 60000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+    };
+  }, []);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -29,21 +76,23 @@ export default function WebGame() {
   const handleFullscreenToggle = () => {
     if (!document.fullscreenElement) {
       if (wrapperRef.current) {
+        const fullscreenElement = wrapperRef.current as FullscreenCapableElement;
         if (wrapperRef.current.requestFullscreen) {
           wrapperRef.current.requestFullscreen();
-        } else if ((wrapperRef.current as any).webkitRequestFullscreen) { 
-          (wrapperRef.current as any).webkitRequestFullscreen();
-        } else if ((wrapperRef.current as any).msRequestFullscreen) { 
-          (wrapperRef.current as any).msRequestFullscreen();
+        } else if (fullscreenElement.webkitRequestFullscreen) {
+          fullscreenElement.webkitRequestFullscreen();
+        } else if (fullscreenElement.msRequestFullscreen) {
+          fullscreenElement.msRequestFullscreen();
         }
       }
     } else {
+      const fullscreenDocument = document as FullscreenCapableDocument;
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      } else if ((document as any).webkitExitFullscreen) {
-        (document as any).webkitExitFullscreen();
-      } else if ((document as any).msExitFullscreen) {
-        (document as any).msExitFullscreen();
+      } else if (fullscreenDocument.webkitExitFullscreen) {
+        fullscreenDocument.webkitExitFullscreen();
+      } else if (fullscreenDocument.msExitFullscreen) {
+        fullscreenDocument.msExitFullscreen();
       }
     }
   };
@@ -58,28 +107,47 @@ export default function WebGame() {
         <div className={styles.gameWrapper}>
           
           <div ref={wrapperRef} className={styles.iframeWrapper}>
-            <button 
-              className={styles.fullscreenBtn} 
-              onClick={handleFullscreenToggle}
-              title={isFullscreen ? "Exit Fullscreen" : "Expand to Fullscreen"}
-            >
-              {isFullscreen ? (
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                </svg>
-              )}
-            </button>
-            <iframe 
-              src="/unity-build/index.html" /* Hosted WebGL build root */
-              className={styles.unityFrame}
-              title="Sushi Nads WebGL Game"
-              allowFullScreen
-              scrolling="no"
-            ></iframe>
+            {apiHealthy && (
+              <button
+                className={styles.fullscreenBtn}
+                onClick={handleFullscreenToggle}
+                title={isFullscreen ? "Exit Fullscreen" : "Expand to Fullscreen"}
+              >
+                {isFullscreen ? (
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                  </svg>
+                )}
+              </button>
+            )}
+
+            {apiHealthy ? (
+              <iframe
+                src="/unity-build/index.html" /* Hosted WebGL build root */
+                className={styles.unityFrame}
+                title="Sushi Nads WebGL Game"
+                allowFullScreen
+                scrolling="no"
+              ></iframe>
+            ) : (
+              <div className={styles.maintenanceCard}>
+                <div className={styles.maintenanceTitle}>Kitchen Closed for Maintenance</div>
+                <div className={styles.maintenanceBody}>
+                  Our chefs are sharpening knives and tuning the burners. Please come back in a little while.
+                </div>
+                <div className={styles.maintenanceSubtext}>
+                  Status: API is temporarily unavailable.
+                </div>
+              </div>
+            )}
+
+            {isHealthChecking && (
+              <div className={styles.healthCheckingBadge}>Checking kitchen status...</div>
+            )}
           </div>
           
           <div className={styles.kitchenMenu}>
@@ -125,7 +193,7 @@ export default function WebGame() {
               </ul>
             )}
             
-            <div className={styles.punText}>Time to serve up some un-roll-evably good sushi! Don't let the pressure boil over! 🍣🔥</div>
+            <div className={styles.punText}>Time to serve up some un-roll-evably good sushi! Don&apos;t let the pressure boil over! 🍣🔥</div>
           </div>
           
         </div>

@@ -3,10 +3,7 @@ import styles from '../styles/ScrollIndicator.module.css';
 
 export default function ScrollIndicator() {
   const scrollToBottom = () => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth'
-    });
+    document.getElementById('how-to-play')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
